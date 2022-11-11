@@ -28,7 +28,7 @@
   4. Model2(JSP + Servlet)
     - 현재 제일 많이 사용되는 MVC(Model View Controller)의 시초
     - JSP는 화면단만 담당, PageController(Servlet)은 화면단과 모델을 연결, Model(비즈니스 로직, Java)
-    <p style="text-align: center;"><img src="images/JSP(Model2).PNG"></p>
+    <p style="text-align: center;"><img src="images/Model2MVC.PNG"></p>
 
   5. MVC 패턴
     - Model2 방식에서 좀 더 진화된 형태의 패턴
@@ -128,7 +128,7 @@
           엘지티비로 바뀐 후에는 엘지티비의 기능을 사용
         }
 
-      - 예제 프로젝트 _002_SpringFramework_Coupling(결합도 높은 방식), _003_SpringFramework_Coupling_Interface(결합도 낮추는 방식)
+      - <b>예제: 프로젝트 _002_SpringFramework_Coupling(결합도 높은 방식), _003_SpringFramework_Coupling_Interface(결합도 낮추는 방식)</b>
 
       
 
