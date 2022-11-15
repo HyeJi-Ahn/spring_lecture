@@ -75,6 +75,51 @@
     - aop:around -> ProceedingJoinPoint 객체 사용  
     - <b>예제 프로젝트: _016_SpringFramework_AOP_JoinPoint</b> 
 
+---
 
+# 5. AOP Annotation
 
+  - <b>예제 프로젝트: _017_SpringFramework_AOP_Annotation</b> 
+
+---
+
+# 6. JDBC Template
+
+  1. JDBC Template이란  
+    - GoF의 디자인 패턴 중 템플릿 디자인 패턴이 적용된 클래스.  
+    - 템플릿 패턴은 반복되는 작업을 캡슐화하여 재사용할 수 있는 패턴으로 정의하는 방식  
+    - DBCP의 DataSource를 의존성으로 주입받아 커넥션 풀 방식으로 사용된다.  
+      DB커넥션을 지정한 개수만큼 만들어놓고 대여해주고 DB연결이 끝날 때 돌려받는 방식.  
+    - <b>예제 프로젝트: _018_SpringFramework_AOP_Annotation</b>   
+  2. JDBC Template에서 사용가능한 메소드  
+    - update() : insert, update, delete 구문 처리 시 사용    
+                 ? 인자값을 어떻게 처리할 지에 따라서 두 가지 방식으로 사용할 수 있다.
+                 1번 방식 : 물음표 개수만큼 인자 값을 나열해서 보냄
+                 update(BOARD_INSERT, boardVO.getTitle(), boardVO.getContent(), boardVO.getWriter());
+                 2번 방식 : 물음표 개수만큼의 배열을 생성하여 배열을 인자 값으로 보냄
+                 Object[] args = {boardVO.getTitle(), boardVO.getContent(), boardVO.getWriter()};
+                 update(BOARD_INSERT, args);
+    - queryForInt() : select 구문으로 검색된 결과값이 정수일 경우 사용. sum이나 count 등을 조회하는 통계 쿼리에서 사용.
+    - queryForObject() : select 구문으로 검색된 결과 값을 특정 자바 객체에 매핑시켜 리턴받고 싶을 때 사용.
+                         select 구문의 결과가 없거나 두 행 이상이면 예외를 발생시킴.
+                         단 건만 조회가 되는 쿼리에서 사용.
+                         RowMapper라는 클래스를 상속하여 구현한 객체로 리턴 값을 받아준다.
+                         RowMapper를 상속받아 구현한 객체에는 항상 mapRow() 메소드를 구현해야 한다.
+                         mapRow() 메소드에서 쿼리 리턴값과 VO를 매핑시켜준다.
+                         BoardRowMapper(게시판 관련 RowMapper)
+    - query() : select 구문으로 검색된 결과 값이 목록일 때 사용  
+                기본적인 사용법은 queryForObject()와 동일.  
+                RowMapper를 사용해서 VO와 매핑시킴. 한 건씩 VO와 매핑한 후 List에 담아서 리턴.  
+  3. JDBC Template 객체를 얻어서 사용하는 방법
+    - JdbcDaoSupport를 상속받아 구현
+      public class BoardDAO extends JdbcDaoSupport {
+        @Autowired
+        public void setSuperDataSource(DataSource dataSource) {
+            super.setDataSource(dataSource);
+        }
+        public void insertBoard(BoardVO boardVO) {
+            getJdbcTemplate().update(BOARD_INSERT, boardVO.getTitle()....);
+        }
+      }
+    - JDBC Template을 bean 객체로 등록
     
