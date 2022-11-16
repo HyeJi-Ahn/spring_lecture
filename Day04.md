@@ -112,6 +112,7 @@
                 RowMapper를 사용해서 VO와 매핑시킴. 한 건씩 VO와 매핑한 후 List에 담아서 리턴.  
   3. JDBC Template 객체를 얻어서 사용하는 방법
     - JdbcDaoSupport를 상속받아 구현
+    ```java
       public class BoardDAO extends JdbcDaoSupport {
         @Autowired
         public void setSuperDataSource(DataSource dataSource) {
@@ -121,5 +122,6 @@
             getJdbcTemplate().update(BOARD_INSERT, boardVO.getTitle()....);
         }
       }
+    ```
     - JDBC Template을 bean 객체로 등록
     
